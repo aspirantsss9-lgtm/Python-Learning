@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "петя",
+        "phone": "2948950850359",
+        "comment": "друг"
+    },
+    {
+        "id": 2,
+        "name": "Vasya",
+        "phone": "668036",
+        "comment": "Friend"
+    }
+]
