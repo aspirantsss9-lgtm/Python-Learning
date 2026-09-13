@@ -1,0 +1,20 @@
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
+from app.routers.api import router as api_router
+from app.routers.pages import router as pages_router
+
+
+app = FastAPI()
+
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+
+@app.get("/ping/")
+async def ping():
+    return {"message": "pong"}
+
+
+app.include_router(pages_router)
+app.include_router(api_router)
