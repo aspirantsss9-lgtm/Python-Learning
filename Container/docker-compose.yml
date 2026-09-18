@@ -1,0 +1,36 @@
+services:
+
+  db:
+    image: postgres:16
+    container_name: container_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: container_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d container_db"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    container_name: container_web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/container_db
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
