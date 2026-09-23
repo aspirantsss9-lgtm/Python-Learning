@@ -1,3 +1,0 @@
-Django
-factory-boy
-Faker
