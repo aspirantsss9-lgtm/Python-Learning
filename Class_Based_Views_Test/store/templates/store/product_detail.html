@@ -1,0 +1,53 @@
+{% extends "store/base.html" %}
+
+{% block title %}{{ product.name }} — DjangoStore{% endblock %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+
+<div class="product-card">
+    <div class="detail-row">
+        <span class="detail-label">ID:</span>
+        {{ product.id }}
+    </div>
+
+    <div class="detail-row">
+        <span class="detail-label">Название:</span>
+        {{ product.name }}
+    </div>
+
+    <div class="detail-row">
+        <span class="detail-label">Описание:</span>
+        {{ product.description }}
+    </div>
+
+    <div class="detail-row">
+        <span class="detail-label">Цена:</span>
+        <span class="price">{{ product.price }} ₽</span>
+    </div>
+
+    <div class="detail-row">
+        <span class="detail-label">Категория:</span>
+        {{ product.category.name }}
+    </div>
+
+    <div class="detail-row">
+        <span class="detail-label">Дата создания:</span>
+        {{ product.created_at|date:"d.m.Y H:i:s" }}
+    </div>
+
+    <a
+        class="button"
+        href="{% url 'product_update' product.id %}"
+    >
+        Редактировать
+    </a>
+
+    <a
+        class="button"
+        href="{% url 'product_list' %}"
+    >
+        Вернуться к списку
+    </a>
+</div>
+{% endblock %}

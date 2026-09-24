@@ -1,0 +1,50 @@
+{% extends "store/base.html" %}
+
+{% block title %}Товары — DjangoStore{% endblock %}
+
+{% block content %}
+<h1>Список товаров</h1>
+
+<a class="button" href="{% url 'product_create' %}">
+    Добавить товар
+</a>
+
+{% if products %}
+    {% for product in products %}
+        <article class="product-card">
+            <h2>
+                <a href="{% url 'product_detail' product.id %}">
+                    {{ product.name }}
+                </a>
+            </h2>
+
+            <p>{{ product.description }}</p>
+
+            <p>
+                <strong>Категория:</strong>
+                {{ product.category.name }}
+            </p>
+
+            <p class="price">
+                {{ product.price }} ₽
+            </p>
+
+            <a
+                class="button"
+                href="{% url 'product_detail' product.id %}"
+            >
+                Подробнее
+            </a>
+
+            <a
+                class="button"
+                href="{% url 'product_update' product.id %}"
+            >
+                Редактировать
+            </a>
+        </article>
+    {% endfor %}
+{% else %}
+    <p>Товары отсутствуют.</p>
+{% endif %}
+{% endblock %}

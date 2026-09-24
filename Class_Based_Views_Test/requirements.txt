@@ -1,0 +1,5 @@
+Django==6.1.1
+factory-boy
+Faker
+pytest
+pytest-django
