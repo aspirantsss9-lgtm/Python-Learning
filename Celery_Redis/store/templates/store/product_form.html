@@ -1,0 +1,43 @@
+{% extends "store/base.html" %}
+
+{% block title %}{{ page_title }} — DjangoStore{% endblock %}
+
+{% block content %}
+<h1>{{ page_title }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class="form-errors">
+            {% for error in form.non_field_errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% for field in form %}
+        <div class="form-field">
+            {{ field.label_tag }}
+
+            {{ field }}
+
+            {% if field.errors %}
+                <div class="error">
+                    {% for error in field.errors %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button class="button" type="submit">
+        {{ submit_text }}
+    </button>
+
+    <a class="button" href="{% url 'product_list' %}">
+        Отмена
+    </a>
+</form>
+{% endblock %}
